@@ -1,7 +1,8 @@
-# map.apps Remote Project Blueprint
+# service.monitor analytics Remote Project / Scatter Plot example
 
 ### Pre Conditions
 This project requires an existing installation of map.apps to work. You need top copy the libs provided in the CD-Contents folder "m2repository" inside your local maven repository.
+You also need to make the service.monitor Analytics bundles available in your remote repository location.
 
 ### Define the mapapps remote base
 Before you can run the project you have to define the mapapps.remote.base property in the pom.xml-file:
