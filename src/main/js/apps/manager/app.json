@@ -1,0 +1,59 @@
+{
+    "appName": "management",
+    "properties": {
+        "title": "Manager"
+    },
+    "load": {
+        "allowedBundles": [
+            "system",
+            "splashscreen",
+            "notifier",
+            "templatelayout",
+            "toolset",
+            "authentication",
+            "forcelogin",
+            "usagelog_management",
+            "usagelog_scatterDashboardConfig",
+            "bundletools",
+            "managementlayout"
+        ],
+        "bundleLocations": ["localbundles", "bundles"]
+    },
+    "bundles": {
+        "templates": {
+            "TemplateModel": {
+                "_selectedTemplate": "template",
+                "_templates": [{
+                        "name": "template",
+                        "location": "managementlayout",
+                        "requiresCSS": true
+                    }]
+            }
+        },
+        "toolset": {
+            "ToolsetManager": {
+                "toolsets": [
+                    {
+                        "id": "default_tools",
+                        "tools": [
+                            "appmanagement_*"
+                        ],
+                        "container": "desktopbackground",
+                        "cssClass": "buildertoolsMenuBar",
+                        "windowType": "menubar",
+                        "position": {
+                            "rel_t": 7,
+                            "rel_l": 10
+                        }
+                    }
+                ]
+            }
+        },
+        "authentication": {
+            "RedirectOnLogout": {
+                "refreshPage": true,
+                "appendReturnUrl": false
+            }
+        }
+    }
+}

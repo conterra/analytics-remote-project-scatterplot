@@ -1,0 +1,123 @@
+{
+  "Bundle-SymbolicName": "usagelog_scatterDashboardConfig",
+  "Bundle-Version": "1.0.0",
+  "Bundle-Name": "${bundleName}",
+  "Bundle-Description": "${bundleDescription}",
+  "Bundle-Vendor": "con terra GmbH",
+  "Bundle-Category": [
+    "usagelog"
+  ],
+  "Product-Name": "service.monitor Analytics",
+  "Require-Bundle": [
+    {
+      "name":"usagelog_management_widgets",
+      "version": "~4.0.0"
+    },
+    {
+      "name": "usagelog_management_scatter",
+      "version": "~1.0.0"
+    }
+  ],
+  "Components": [
+    {
+      "name": "DashboardConfig",
+      "impl": "ct/Stateful",
+      "provides": [
+        "usagelog_management.DashboardConfig"
+      ],
+      "propertiesConstructor": true,
+      "properties": {
+        "config": {
+          "dashboards": [
+
+            {
+              "title": "${dashboards.scatter.title}",
+              "widgetIds": [
+                "separator_quickselect",
+                 "timeQuerySelector", "deviceQueryParamSelector","mobileDevicesQueryParamSelector",
+                "separator_client",
+                "scatter"
+              ],
+              "iconClass": "icon-globe-flat"
+            }
+          ],
+          "widgets": [
+            {
+              "widgetId": "scatter",
+              "item_query": {
+                "refresh": false,
+                "query": "event_topic.raw:ct\\/framework\\/FrameworkEvent\\/STARTED AND viewport.width:[1 TO *]",
+                "size": 10000,
+                "returnFields": [
+                  "viewport.width",
+                  "viewport.height"
+                ],
+                "itemCount": 10000
+              },
+              "chart": {
+                "type": "Scatter",
+                "title": "${widgets.viewportScatter.title}",
+                "xAxisLabel":"${widgets.viewportScatter.xAxis}",
+                "yAxisLabel":"${widgets.viewportScatter.yAxis}",
+                "width": 1000,
+                "height": 500,
+                "showLegend": true
+              }
+            },
+            {
+              "widgetId": "timeQuerySelector",
+              "itemView": {
+                "title": "${quickSelects.time.title}",
+                "type": "TimeQuerySelector",
+                "defaultValue": "${quickSelects.time.default}"
+              }
+            },
+            {
+              "widgetId": "deviceQueryParamSelector",
+              "selector_value_query": {
+                "sort": "count",
+                "distinctValues": 30,
+                "queryField": "client_type.raw"
+              },
+              "itemView": {
+                "title": "${quickSelects.device.title}",
+                "type": "QueryParamSelector",
+                "defaultValue": "${quickSelects.device.default}"
+              }
+            },
+            {
+              "widgetId": "mobileDevicesQueryParamSelector",
+              "selector_value_query": {
+                "sort": "count",
+                "distinctValues": 30,
+                "queryField": "user_agent_parsed.device.raw"
+              },
+              "itemView": {
+                "title": "${quickSelects.mobile_device.title}",
+                "type": "QueryParamSelector",
+                "defaultValue": "${quickSelects.mobile_device.default}"
+              }
+            },
+            {
+              "widgetId": "separator_client",
+              "itemView": {
+                "type": "Separator",
+                "showRuler": true,
+                "title": "${separators.client.title}",
+                "text": "${separators.client.text}"
+              }
+            },
+            {
+              "widgetId": "separator_quickselect",
+              "itemView": {
+                "type": "Separator",
+                "showRuler": true,
+                "title": "${separators.quickSelect.title}"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

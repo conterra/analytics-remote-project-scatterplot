@@ -1,0 +1,38 @@
+{
+  "Bundle-SymbolicName": "usagelog_management_scatter",
+  "Bundle-Version": "1.0.0",
+  "Bundle-Name": "${bundleName}",
+  "Bundle-Description": "${bundleDescription}",
+  "Bundle-Vendor": "con terra GmbH",
+  "Bundle-Category": [
+    "usagelog"
+  ],
+  "Product-Name": "service.monitor Analytics",
+  "Require-Bundle": [
+    {
+      "name": "usagelog_management_api",
+      "version": "~4.0.0"
+    }
+  ],
+  "Components": [
+    {
+      "name": "ScatterWidgetFactory",
+      "provides": "usagelog_management.UsageDataWidgetFactory",
+      "references": [
+        {
+          "name": "store",
+          "providing": "usagelog_management.ElasticSearchStore"
+        },
+        {
+          "name": "_dashboardContext",
+          "providing": "usagelog_management.DashboardContext"
+        },
+        {
+          "name": "_queryPreProcessors",
+          "providing": "usagelog_management.QueryPreProcessor",
+          "cardinality": "0..n"
+        }
+      ]
+    }
+  ]
+}
